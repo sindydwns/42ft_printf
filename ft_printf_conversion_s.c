@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_conversion_s.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/13 16:26:51 by yonshin           #+#    #+#             */
-/*   Updated: 2022/08/20 21:48:38 by yonshin          ###   ########.fr       */
+/*   Created: 2022/08/19 19:50:26 by yonshin           #+#    #+#             */
+/*   Updated: 2022/08/19 20:03:40 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# define FT_NULL 0
-# define FT_ERROR -1
-# define FT_SUCCESS 0
+#include "ft_printf_utils.h"
 
-int	ft_printf(const char *fmt, ...);
-
-#endif
+int	ft_printf_conversion_s(t_printable *printable)
+{
+	printable++;
+	return (0);
+}

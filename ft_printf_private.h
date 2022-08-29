@@ -6,13 +6,13 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 19:47:48 by yonshin           #+#    #+#             */
-/*   Updated: 2022/08/22 13:52:03 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/08/29 22:50:28 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_PRIVATE_H
 # define FT_PRINTF_PRIVATE_H
-# define FALG_NO 0
+# define FLAG_NO 0
 # define FLAG_DASH 1
 # define FLAG_ZERO 2
 # define FLAG_DOT 4

@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   chain_free.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/13 16:26:51 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/10 13:34:51 by yonshin          ###   ########.fr       */
+/*   Created: 2022/09/09 16:16:20 by yonshin           #+#    #+#             */
+/*   Updated: 2022/09/09 16:32:25 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-int	ft_printf(const char *fmt, ...);
-
-#endif
+t_chain	*chain_free(t_chain *chain, int range)
+{
+	if (range & FT_CHAIN_FREE_PREV)
+		ft_lstclear(&(chain->prev), chain->freeprev);
+	if (range & FT_CHAIN_FREE_CURR)
+		ft_lstclear(&(chain->curr), chain->freecurr);
+	return (chain);
+}

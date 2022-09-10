@@ -6,10 +6,11 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 22:37:07 by yonshin           #+#    #+#             */
-/*   Updated: 2022/07/10 23:49:49 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/09 14:29:42 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)

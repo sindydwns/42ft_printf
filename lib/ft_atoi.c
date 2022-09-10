@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 19:11:24 by yonshin           #+#    #+#             */
-/*   Updated: 2022/07/16 03:10:04 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/09 14:27:55 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	ft_atoi(const char *str)
 		if (value > (value * 10) + (*str - '0'))
 		{
 			if (sign == -1)
-				return ((int)LONG_MIN);
+				return (0);
 			else
-				return ((int)LONG_MAX);
+				return (-1);
 		}
 		value = (value * 10) + (*str - '0');
 		str++;

@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 19:47:48 by yonshin           #+#    #+#             */
-/*   Updated: 2022/08/29 22:50:28 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/08 19:49:48 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,42 @@
 # define FLAG_SHARP 8
 # define FLAG_SPACE 16
 # define FLAG_PLUS 32
-# define STAT_ERR -1
-# define STAT_NORM 0
-# define STAT_FORM 1
+# define FORMAT_NO 0
+# define FORMAT_USE_CONVERSION 1
+# define FORMAT_USE_FLAG 2
+# define FORMAT_USE_WIDTH 4
+# define FORMAT_USE_PRECISION 8
+# define ERR -1
 # include "libft.h"
 
-typedef struct s_printable
-{
-	char		*str;
-	int			len;
-	int			flags;
-	void		*data;
-	void		(*print)(struct s_printable);
-}	t_printable;
-typedef void	(*t_print_func)(struct s_printable);
+typedef char *(*t_conversion_func)(void *pared_token);
 
-int		ft_printf_conversion_(t_printable *printable);
-int		ft_printf_conversion_c(t_printable *printable);
-int		ft_printf_conversion_d(t_printable *printable);
-int		ft_printf_conversion_i(t_printable *printable);
-int		ft_printf_conversion_p(t_printable *printable);
-int		ft_printf_conversion_s(t_printable *printable);
-int		ft_printf_conversion_u(t_printable *printable);
-int		ft_printf_conversion_x(t_printable *printable);
-int		ft_printf_conversion_xx(t_printable *printable);
+typedef struct s_raw_token
+{
+	char	*str;
+	int		len;
+	va_list	*args;
+}	t_raw_token;
+
+typedef struct s_parsed_token
+{
+	char	*str;
+	void	*arg;
+	int		format;
+	int		flags;
+	int		width;
+	int		precision;
+	char	conversion;
+}	t_parsed_token;
+
+char	*ft_printf_conversion_(t_parsed_token *token);
+char	*ft_printf_conversion_c(t_parsed_token *token);
+char	*ft_printf_conversion_d(t_parsed_token *token);
+char	*ft_printf_conversion_i(t_parsed_token *token);
+char	*ft_printf_conversion_p(t_parsed_token *token);
+char	*ft_printf_conversion_s(t_parsed_token *token);
+char	*ft_printf_conversion_u(t_parsed_token *token);
+char	*ft_printf_conversion_x(t_parsed_token *token);
+char	*ft_printf_conversion_xx(t_parsed_token *token);
 
 #endif

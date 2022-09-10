@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   chain_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/13 16:26:51 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/10 13:34:51 by yonshin          ###   ########.fr       */
+/*   Created: 2022/09/09 15:45:53 by yonshin           #+#    #+#             */
+/*   Updated: 2022/09/09 23:40:41 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include <stdlib.h>
+#include "libft.h"
 
-int	ft_printf(const char *fmt, ...);
-
-#endif
+t_chain	*chain_init(t_chain *chain, t_list *lst)
+{
+	chain->prev = 0;
+	chain->curr = lst;
+	chain->freecurr = free;
+	chain->freeprev = free;
+	chain->flat = chain_flat;
+	chain->reduce = chain_reduce;
+	chain->map = chain_map;
+	chain->freerule = chain_free_rule;
+	chain->freeall = chain_free;
+	return (chain);
+}

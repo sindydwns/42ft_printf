@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 06:34:46 by yonshin           #+#    #+#             */
-/*   Updated: 2022/07/12 10:30:27 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/09 13:47:31 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
 	t_list	*next;
 
-	if (lst == 0 || del == 0)
+	if (lst == 0)
 		return ;
 	while (*lst)
 	{

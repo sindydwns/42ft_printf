@@ -6,10 +6,11 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 22:39:02 by yonshin           #+#    #+#             */
-/*   Updated: 2022/07/16 03:33:27 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/09 14:29:11 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 static char	*reverse_dup(char *str, size_t size)

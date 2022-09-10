@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   chain_flat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/10 22:39:33 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/09 14:29:56 by yonshin          ###   ########.fr       */
+/*   Created: 2022/09/09 15:59:02 by yonshin           #+#    #+#             */
+/*   Updated: 2022/09/10 00:16:01 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+t_chain	*chain_flat(t_chain *chain, t_flatf f)
 {
-	char			*result;
-	size_t			size;
-	unsigned int	idx;
+	t_list	*curr;
+	t_list	*new_list;
 
-	if (s == 0 || f == 0)
-		return (0);
-	size = 0;
-	while (s[size])
-		size++;
-	result = (char *)malloc(sizeof(char) * (size + 1));
-	if (result == 0)
-		return (0);
-	idx = -1;
-	while (++idx < size)
-		result[idx] = f(idx, s[idx]);
-	result[size] = 0;
-	return (result);
+	if (chain->curr == 0)
+		return (chain);
+	curr = chain->curr;
+	chain->prev = chain->curr;
+	chain->curr = 0;
+	while (curr)
+	{
+		new_list = f(curr->content);
+		if (new_list == 0)
+			return chain->freeall(chain, FT_CHAIN_FREE_ALL);
+		ft_lstadd_back(&(chain->curr), new_list);
+		curr = curr->next;
+	}
+	return (chain);
 }

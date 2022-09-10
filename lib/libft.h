@@ -6,15 +6,20 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:52:51 by yonshin           #+#    #+#             */
-/*   Updated: 2022/08/19 20:19:25 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/10 00:17:15 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <unistd.h>
-# include <limits.h>
-# include <stdlib.h>
+# define FT_NULL 0
+# define FT_SUCCESS 0
+# define FT_ERROR -1
+# define FT_TRUE 1
+# define FT_FALSE 0
+# define FT_CHAIN_FREE_PREV 1
+# define FT_CHAIN_FREE_CURR 2
+# define FT_CHAIN_FREE_ALL 3
 # include "get_next_line.h"
 
 typedef struct s_list
@@ -22,6 +27,22 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+typedef void	(*t_delf)(void *p1);
+typedef	t_list	*(*t_flatf)(void *p1);
+typedef void	*(*t_reducef)(t_list **list);
+typedef	void	*(*t_mapf)(void *p1);
+typedef struct s_chain
+{
+	t_list			*prev;
+	t_list			*curr;
+	t_delf			freeprev;
+	t_delf			freecurr;
+	struct s_chain	*(*flat)(struct s_chain *chain, t_flatf f);
+	struct s_chain	*(*reduce)(struct s_chain *chain, t_reducef f);
+	struct s_chain	*(*map)(struct s_chain *chain, t_mapf f);
+	struct s_chain	*(*freerule)(struct s_chain *chain, t_delf d1, t_delf d2);
+	struct s_chain	*(*freeall)(struct s_chain *chain, int range);
+}	t_chain;
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
@@ -66,4 +87,10 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_chain	*chain_init(t_chain *chain, t_list *lst);
+t_chain	*chain_flat(t_chain *chain, t_flatf f);
+t_chain	*chain_reduce(t_chain *chain, t_reducef f);
+t_chain	*chain_map(t_chain *chain, t_mapf f);
+t_chain	*chain_free_rule(t_chain *chain, t_delf d4prev, t_delf del4curr);
+t_chain	*chain_free(t_chain *chain, int range);
 #endif

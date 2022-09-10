@@ -6,10 +6,11 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 22:38:26 by yonshin           #+#    #+#             */
-/*   Updated: 2022/07/20 17:26:31 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/09 14:29:29 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 static char	**next(char const *start, char c, int idx)

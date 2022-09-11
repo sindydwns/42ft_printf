@@ -6,7 +6,7 @@
 #    By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/13 14:29:59 by yonshin           #+#    #+#              #
-#    Updated: 2022/09/12 00:33:12 by yonshin          ###   ########.fr        #
+#    Updated: 2022/09/12 02:27:11 by yonshin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ OBJECTS = \
 	ft_lstadd_back.o \
 	ft_lstdelone.o \
 	ft_lstclear.o \
+	ft_lstreverse.o \
 	ft_lstiter.o \
 	ft_lstmap.o \
 	get_next_line.o \

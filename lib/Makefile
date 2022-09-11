@@ -6,7 +6,7 @@
 #    By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/13 14:29:59 by yonshin           #+#    #+#              #
-#    Updated: 2022/09/09 23:40:41 by yonshin          ###   ########.fr        #
+#    Updated: 2022/09/12 00:33:12 by yonshin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ OBJECTS = \
 	ft_lstmap.o \
 	get_next_line.o \
 	get_next_line_utils.o \
+	chain_apply.o \
 	chain_init.o \
 	chain_flat.o \
 	chain_reduce.o \

@@ -14,9 +14,9 @@
 
 t_chain	*chain_free(t_chain *chain, int range)
 {
-	if (range & FT_CHAIN_FREE_PREV)
+	if (range & FT_CHAIN_PREV)
 		ft_lstclear(&(chain->prev), chain->freeprev);
-	if (range & FT_CHAIN_FREE_CURR)
+	if (range & FT_CHAIN_CURR)
 		ft_lstclear(&(chain->curr), chain->freecurr);
 	return (chain);
 }

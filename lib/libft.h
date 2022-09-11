@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:52:51 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/12 02:26:57 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/12 03:00:55 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # define FT_ERROR -1
 # define FT_TRUE 1
 # define FT_FALSE 0
-# define FT_CHAIN_FREE_PREV 1
-# define FT_CHAIN_FREE_CURR 2
-# define FT_CHAIN_FREE_ALL 3
+# define FT_CHAIN_PREV 1
+# define FT_CHAIN_CURR 2
+# define FT_CHAIN_ALL 3
 # include "get_next_line.h"
 
 typedef struct s_list
@@ -53,7 +53,7 @@ typedef struct s_chain
 	struct s_chain	*(*reduce)(struct s_chain *chain, t_reducef f, ...);
 	struct s_chain	*(*map)(struct s_chain *chain, t_mapf f, ...);
 	struct s_chain	*(*freerule)(struct s_chain *chain, t_delf d1, t_delf d2);
-	struct s_chain	*(*freeall)(struct s_chain *chain, int range);
+	struct s_chain	*(*free)(struct s_chain *chain, int range);
 }	t_chain;
 
 int		ft_atoi(const char *str);

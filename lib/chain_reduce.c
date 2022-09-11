@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 16:01:20 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/12 02:44:29 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/12 03:00:55 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_chain	*chain_reduce(t_chain *chain, t_reducef1 f, ...)
 	{
 		new_node = ft_lstnew(chain_apply(f, &curr, args, chain));
 		if (new_node == 0 || new_node->content == 0)
-			return chain->freeall(chain, FT_CHAIN_FREE_ALL);
+			return chain->free(chain, FT_CHAIN_ALL);
 		ft_lstadd_front(&(chain->curr), new_node);
 		if (curr)
 			curr = curr->next;

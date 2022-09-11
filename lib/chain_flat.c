@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:59:02 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/12 02:54:08 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/12 04:17:16 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_chain	*chain_flat(t_chain *chain, t_flatf1 f, ...)
 	{
 		new_list = chain_apply(f, curr->content, args, chain);
 		if (is_valid(new_list) == FT_FALSE)
-			return chain->freeall(chain, FT_CHAIN_FREE_ALL);
+			return chain->free(chain, FT_CHAIN_ALL);
 		ft_lstadd_front(&(chain->curr), new_list);
 		curr = curr->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:45:53 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/09 23:40:41 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/12 03:00:55 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ t_chain	*chain_init(t_chain *chain, t_list *lst)
 	chain->reduce = chain_reduce;
 	chain->map = chain_map;
 	chain->freerule = chain_free_rule;
-	chain->freeall = chain_free;
+	chain->free = chain_free;
 	return (chain);
 }

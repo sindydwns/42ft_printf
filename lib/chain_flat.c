@@ -6,47 +6,40 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:59:02 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/12 04:17:16 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/12 21:37:15 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "libft.h"
 
-static int	is_valid(t_list *list)
+static t_list	*factory(t_chain *ch, t_list **lst, t_mapf f, void *valst)
 {
-	if (list == FT_NULL)
-		return (FT_FALSE);
-	while (list)
+	t_list	*result;
+	t_list	*next;
+
+	result = chain_apply(f, (*lst)->content, valst, ch);
+	if (result == 0)
+		return (0);
+	next = result;
+	while (next)
 	{
-		if (list->content == FT_NULL)
-			return (FT_FALSE);
-		list = list->next;
+		if (next->content == 0)
+		{
+			ft_lstclear(&result, ch->freecurr);
+			return (0);
+		}
+		next = next->next;
 	}
-	return (FT_TRUE);
+	return (result);
 }
 
 t_chain	*chain_flat(t_chain *chain, t_flatf1 f, ...)
 {
-	t_list	*curr;
-	t_list	*new_list;
 	va_list	args;
 
-	if (chain->curr == 0)
-		return (chain);
 	va_start(args, f);
-	curr = chain->curr;
-	chain->prev = chain->curr;
-	chain->curr = 0;
-	while (curr)
-	{
-		new_list = chain_apply(f, curr->content, args, chain);
-		if (is_valid(new_list) == FT_FALSE)
-			return chain->free(chain, FT_CHAIN_ALL);
-		ft_lstadd_front(&(chain->curr), new_list);
-		curr = curr->next;
-	}
-	ft_lstreverse(&(chain->curr));
+	chain_iterate(chain, factory, (t_mapf)f, args);
 	va_end(args);
 	return (chain);
 }

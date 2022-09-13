@@ -6,35 +6,34 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 16:01:20 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/12 03:00:55 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/12 21:39:56 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "libft.h"
 
+static t_list	*factory(t_chain *ch, t_list **lst, t_mapf f, void *valst)
+{
+	t_list	*result;
+	void	*content;
+
+	content = chain_apply(f, lst, valst, ch);
+	if (content == 0)
+		return (0);
+	result = ft_lstnew(content);
+	if (result)
+		return (result);
+	ch->freecurr(content);
+	return (0);
+}
+
 t_chain	*chain_reduce(t_chain *chain, t_reducef1 f, ...)
 {
-	t_list	*curr;
-	t_list	*new_node;
 	va_list	args;
 
-	if (chain->curr == 0)
-		return (chain);
 	va_start(args, f);
-	curr = chain->curr;
-	chain->prev = chain->curr;
-	chain->curr = 0;
-	while (curr)
-	{
-		new_node = ft_lstnew(chain_apply(f, &curr, args, chain));
-		if (new_node == 0 || new_node->content == 0)
-			return chain->free(chain, FT_CHAIN_ALL);
-		ft_lstadd_front(&(chain->curr), new_node);
-		if (curr)
-			curr = curr->next;
-	}
-	ft_lstreverse(&(chain->curr));
+	chain_iterate(chain, factory, (t_mapf)f, args);
 	va_end(args);
 	return (chain);
 }

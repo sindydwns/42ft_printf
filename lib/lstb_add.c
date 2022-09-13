@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chain_init.c                                       :+:      :+:    :+:   */
+/*   lstb_add.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/09 15:45:53 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/12 18:56:18 by yonshin          ###   ########.fr       */
+/*   Created: 2022/09/13 03:11:17 by yonshin           #+#    #+#             */
+/*   Updated: 2022/09/13 13:53:57 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-t_chain	*chain_init(t_chain *chain, t_list *lst)
+int	lstb_add(t_lstb *lstb, void *content, t_delf del)
 {
-	chain->prev = 0;
-	chain->curr = lst;
-	chain->freecurr = free;
-	chain->freeprev = free;
-	chain->flat = chain_flat;
-	chain->reduce = chain_reduce;
-	chain->map = chain_map;
-	chain->freerule = chain_free_rule;
-	chain->free = chain_free;
-	chain->next = chain_next;
-	return (chain);
+	t_list	*node;
+
+	node = ft_lstnew(content);
+	if (node == 0)
+	{
+		if (del)
+			del(content);
+		return (FT_ERROR);
+	}
+	if (lstb->last)
+		ft_lstadd_back(&(lstb->last), node);
+	else
+		ft_lstadd_back(&(lstb->head), node);
+	lstb->last = node;
+	return (FT_SUCCESS);
 }

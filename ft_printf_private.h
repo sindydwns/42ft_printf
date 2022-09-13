@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 19:47:48 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/08 19:49:48 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/12 21:48:45 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,12 @@
 # define ERR -1
 # include "libft.h"
 
-typedef char *(*t_conversion_func)(void *pared_token);
 
-typedef struct s_raw_token
+typedef struct s_substr
 {
 	char	*str;
 	int		len;
-	va_list	*args;
-}	t_raw_token;
+}	t_substr;
 
 typedef struct s_parsed_token
 {
@@ -46,6 +44,7 @@ typedef struct s_parsed_token
 	int		precision;
 	char	conversion;
 }	t_parsed_token;
+typedef char *(*t_conversion_func)(t_parsed_token *token);
 
 char	*ft_printf_conversion_(t_parsed_token *token);
 char	*ft_printf_conversion_c(t_parsed_token *token);

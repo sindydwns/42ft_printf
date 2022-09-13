@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chain_init.c                                       :+:      :+:    :+:   */
+/*   lstb_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/09 15:45:53 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/12 18:56:18 by yonshin          ###   ########.fr       */
+/*   Created: 2022/09/13 02:55:15 by yonshin           #+#    #+#             */
+/*   Updated: 2022/09/13 03:35:04 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-t_chain	*chain_init(t_chain *chain, t_list *lst)
+t_lstb	*lstb_init(t_lstb *lstb, t_list *list)
 {
-	chain->prev = 0;
-	chain->curr = lst;
-	chain->freecurr = free;
-	chain->freeprev = free;
-	chain->flat = chain_flat;
-	chain->reduce = chain_reduce;
-	chain->map = chain_map;
-	chain->freerule = chain_free_rule;
-	chain->free = chain_free;
-	chain->next = chain_next;
-	return (chain);
+	if (lstb == FT_NULL)
+		return (FT_NULL);
+	lstb->content = 0;
+	lstb->head = list;
+	lstb->add = lstb_add;
+	lstb->clear = lstb_clear;
+	lstb->last = list;
+	while (lstb->last && lstb->last->next)
+		lstb->last = lstb->last->next;
+	return (lstb);
 }

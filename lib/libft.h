@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:52:51 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/12 03:00:55 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/13 13:35:28 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,17 @@ typedef struct s_chain
 	struct s_chain	*(*map)(struct s_chain *chain, t_mapf f, ...);
 	struct s_chain	*(*freerule)(struct s_chain *chain, t_delf d1, t_delf d2);
 	struct s_chain	*(*free)(struct s_chain *chain, int range);
+	t_list			*(*next)(struct s_chain *chain);
 }	t_chain;
+typedef t_list	*(*t_factory)(t_chain *ch, t_list **lst, t_mapf f, void *valst);
+typedef struct s_lstb
+{
+	void			*content;
+	t_list			*head;
+	t_list			*last;
+	int				(*add)(struct s_lstb *b, void *content, t_delf del);
+	struct s_lstb	*(*clear)(struct s_lstb *b, t_delf del);
+}	t_lstb;
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
@@ -97,14 +107,19 @@ t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
-void	ft_lstreverse(t_list **lst);
+t_list	*ft_lstreverse(t_list **lst);
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-void	*chain_apply(void *f, void *curr, void *valist, void *end);
 t_chain	*chain_init(t_chain *chain, t_list *lst);
+t_chain	*chain_iterate(t_chain *chain, t_factory fct, t_mapf f, void *valst);
+void	*chain_apply(void *f, void *curr, void *valst, void *end);
+t_list	*chain_next(t_chain *ch);
 t_chain	*chain_flat(t_chain *chain, t_flatf f, ...);
 t_chain	*chain_reduce(t_chain *chain, t_reducef f, ...);
 t_chain	*chain_map(t_chain *chain, t_mapf f, ...);
 t_chain	*chain_free_rule(t_chain *chain, t_delf d4prev, t_delf del4curr);
 t_chain	*chain_free(t_chain *chain, int range);
+t_lstb	*lstb_init(t_lstb *lstb, t_list *list);
+int		lstb_add(t_lstb *lstb, void *content, t_delf del);
+t_lstb	*lstb_clear(t_lstb *lstb, t_delf del);
 #endif

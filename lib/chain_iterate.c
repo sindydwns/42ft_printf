@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chain_map.c                                        :+:      :+:    :+:   */
+/*   chain_iterate.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/09 16:04:43 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/12 18:48:14 by yonshin          ###   ########.fr       */
+/*   Created: 2022/09/12 18:48:17 by yonshin           #+#    #+#             */
+/*   Updated: 2022/09/12 21:41:53 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "libft.h"
 
-static t_list	*factory(t_chain *ch, t_list **lst, t_mapf f, void *valst)
+t_chain	*chain_iterate(t_chain *chain, t_factory fct, t_mapf f, void *valst)
 {
-	t_list	*result;
-	void	*content;
+	t_list	*old_lst;
+	t_list	*new_node;
 
-	content = chain_apply(f, (*lst)->content, valst, ch);
-	if (content == 0)
+	if (chain->curr == 0)
+		return (chain);
+	old_lst = chain->next(chain);
+	while (old_lst)
+	{
+		new_node = fct(chain, &old_lst, f, (va_list)valst);
+		if (new_node == 0)
+			return (chain->free(chain, FT_CHAIN_ALL));
+		ft_lstadd_front(&(chain->curr), new_node);
+		if (old_lst)
+			old_lst = old_lst->next;
+	}
+	if (chain->curr == 0)
 		return (0);
-	result = ft_lstnew(content);
-	if (result)
-		return (result);
-	ch->freecurr(content);
-	return (0);
-}
-
-t_chain *chain_map(t_chain *chain, t_mapf f, ...)
-{
-	va_list	args;
-
-	va_start(args, f);
-	chain_iterate(chain, factory, f, args);
-	va_end(args);
+	ft_lstreverse(&(chain->curr));
 	return (chain);
 }

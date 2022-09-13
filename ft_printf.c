@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:15:29 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/10 14:05:38 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/13 14:56:51 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,46 +25,62 @@ int	ft_printf(const char *fmt, ...)
 	return (0);
 }
 
-t_list	*str2tokenlst(char *str)
+void test(void *test)
 {
-
-}
-
-char	*str_add_a(char *str)
-{
-	return ft_strjoin(str, "a");
-}
-char	*str_add_nl(char *str)
-{
-	return ft_strjoin(str, "\n");
+	test++;
 }
 
 #include <stdio.h>
+static t_list	*parse2substr(char *str)
+{
+	t_substr			*ct;
+	t_lstb				lstb;
+	const static char	*conv = "cdipsuxX%";
+
+	lstb_init(&lstb, 0);
+	while (*str)
+	{
+		printf("--------%s\n", str);
+		ct = (t_substr *)malloc(sizeof(t_substr));
+		if (ct == 0 || lstb.add(&lstb, ct, free))
+			return (lstb.clear(&lstb, free)->head);
+		ct->str = str;
+		ct->len = 1;
+		while (str[0] == '%' && str[ct->len] &&
+			ft_strchr(conv, str[ct->len]) == 0)
+			ct->len++;
+		while (str[0] != '%' && str[ct->len] &&
+			str[ct->len] != '%')
+			ct->len++;
+		if (str[0] == '%' && str[ct->len])
+			ct->len++;
+		str = str + ct->len;
+	}
+	return (lstb.head);
+}
+
+void check_leak(void)
+{
+	system("leaks a.out");
+}
+
 #include "libft.h"
 int main(void)
 {
-	// for test
-
-	t_list *lst = 0;
-	ft_lstadd_back(&lst, ft_lstnew(ft_strdup("a")));
-	ft_lstadd_back(&lst, ft_lstnew(ft_strdup("b")));
-	ft_lstadd_back(&lst, ft_lstnew(ft_strdup("c")));
-	ft_lstadd_back(&lst, ft_lstnew(ft_strdup("d")));
-
+	char	*str = ft_strdup("asdf%da%%fsdf%%%faasdf");
+	t_list 	*lst = ft_lstnew(str);
 	t_chain	ch;
 	lst = chain_init(&ch, lst)
-		->map(&ch, (t_mapf)str_add_a)->freeall(&ch, FT_CHAIN_FREE_PREV)
-		->map(&ch, (t_mapf)str_add_a)->freeall(&ch, FT_CHAIN_FREE_PREV)
-		->map(&ch, (t_mapf)str_add_a)->freeall(&ch, FT_CHAIN_FREE_PREV)
-		->map(&ch, (t_mapf)str_add_nl)->freeall(&ch, FT_CHAIN_FREE_PREV)
-		->curr;
-
-	if (lst == 0)
-		return -1;
+		->flat(&ch, (t_flatf)parse2substr, &ch)
+		->next(&ch);
 	while (lst)
 	{
-		ft_putstr_fd(lst->content, 1);
+		t_substr *token = (t_substr *)lst->content;
+		printf("--%p %d\n", token->str, token->len);
 		lst = lst->next;
 	}
-	while(1){}
+	ch.free(&ch, FT_CHAIN_ALL);
+
+	atexit(check_leak);
+	return (0);
 }

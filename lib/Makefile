@@ -6,7 +6,7 @@
 #    By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/13 14:29:59 by yonshin           #+#    #+#              #
-#    Updated: 2022/09/13 23:15:43 by yonshin          ###   ########.fr        #
+#    Updated: 2022/09/14 04:05:56 by yonshin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ OBJECTS = \
 	ft_putstr_fd.o \
 	ft_split.o \
 	ft_strchr.o \
+	ft_strchri.o \
 	ft_strdup.o \
 	ft_strjoin.o \
 	ft_strlcat.o \

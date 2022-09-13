@@ -6,7 +6,7 @@
 #    By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/13 14:29:59 by yonshin           #+#    #+#              #
-#    Updated: 2022/09/13 03:38:49 by yonshin          ###   ########.fr        #
+#    Updated: 2022/09/13 23:15:43 by yonshin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,13 +61,11 @@ OBJECTS = \
 	get_next_line.o \
 	get_next_line_utils.o \
 	chain_init.o \
+	chain_param.o \
 	chain_apply.o \
+	chain_call.o \
 	chain_next.o \
 	chain_iterate.o \
-	chain_flat.o \
-	chain_reduce.o \
-	chain_map.o \
-	chain_free_rule.o \
 	chain_free.o \
 	lstb_init.o \
 	lstb_add.o \

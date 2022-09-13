@@ -6,11 +6,12 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 03:11:17 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/13 13:53:57 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/13 19:45:12 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "advlst.h"
 
 int	lstb_add(t_lstb *lstb, void *content, t_delf del)
 {
@@ -26,7 +27,7 @@ int	lstb_add(t_lstb *lstb, void *content, t_delf del)
 	if (lstb->last)
 		ft_lstadd_back(&(lstb->last), node);
 	else
-		ft_lstadd_back(&(lstb->head), node);
+		ft_lstadd_back(&(lstb->list), node);
 	lstb->last = node;
 	return (FT_SUCCESS);
 }

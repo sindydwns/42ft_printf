@@ -6,30 +6,23 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 00:10:03 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/13 16:00:59 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/13 23:32:22 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "libft.h"
+#include "advlst.h"
 
-void	*chain_apply(void *f, void *p, void *valist, void *end)
+void	*chain_apply(void *f, void *p, void **params, int len)
 {
-	va_list	val;
-	void	*arr[4];
-
-	val = (va_list)valist;
-	arr[0] = va_arg(val, void *);
-	if (arr[0] == end)
+	if (len == 0)
 		return (((t_mapf1)f)(p));
-	arr[1] = va_arg(val, void *);
-	if (arr[1] == end)
-		return (((t_mapf2)f)(p, arr[0]));
-	arr[2] = va_arg(val, void *);
-	if (arr[2] == end)
-		return (((t_mapf3)f)(p, arr[0], arr[1]));
-	arr[3] = va_arg(val, void *);
-	if (arr[3] == end)
-		return (((t_mapf4)f)(p, arr[0], arr[1], arr[2]));
+	if (len == 1)
+		return (((t_mapf2)f)(p, params[0]));
+	if (len == 2)
+		return (((t_mapf3)f)(p, params[0], params[1]));
+	if (len == 3)
+		return (((t_mapf4)f)(p, params[0], params[1], params[2]));
 	return (((t_mapf1)f)(p));
 }

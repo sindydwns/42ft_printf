@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "advlst.h"
 
 t_chain	*chain_free(t_chain *chain, int range)
 {
-	if (range & FT_CHAIN_PREV)
-		ft_lstclear(&(chain->prev), chain->freeprev);
-	if (range & FT_CHAIN_CURR)
-		ft_lstclear(&(chain->curr), chain->freecurr);
+	if (range & CHAIN_PREV)
+		ft_lstclear(&(chain->prev), chain->freerule[1]);
+	if (range & CHAIN_CURR)
+		ft_lstclear(&(chain->curr), chain->freerule[0]);
 	return (chain);
 }

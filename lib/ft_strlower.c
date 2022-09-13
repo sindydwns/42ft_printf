@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_conversion_x.c                           :+:      :+:    :+:   */
+/*   ft_strlower.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/19 19:50:31 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 08:40:51 by yonshin          ###   ########.fr       */
+/*   Created: 2022/09/14 07:24:03 by yonshin           #+#    #+#             */
+/*   Updated: 2022/09/14 07:53:29 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdarg.h>
 #include "libft.h"
-#include "ft_printf_private.h"
 
-char	*ft_printf_conversion_x(t_parsed_token *token, va_list *valst)
+char	*ft_strlower(char *str)
 {
-	void			*value;
-	char			*temp;
-	char			*res;
+	char	*res;
+	int		idx;
 
-	token++;
-	value = va_arg(*valst, void *);
-	res = ft_tobase((unsigned int)value, "0123456789abcdef");
-	temp = res;
-	res = ft_strjoin("0x", res);
-	free(temp);
+	if (str == 0)
+		return (0);
+	res = (char *)malloc(sizeof(char) * ft_strlen(str) + 1);
+	if (res == 0)
+		return (0);
+	idx = -1;
+	while (str[++idx])
+		res[idx] = ft_tolower(str[idx]);
+	res[idx] = 0;
 	return (res);
 }

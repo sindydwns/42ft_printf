@@ -6,7 +6,7 @@
 #    By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/13 14:29:59 by yonshin           #+#    #+#              #
-#    Updated: 2022/09/14 04:05:56 by yonshin          ###   ########.fr        #
+#    Updated: 2022/09/14 08:38:29 by yonshin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,13 @@ OPTIONS = rc
 NAME = libft.a
 CFLAGS = -Wall -Wextra -Werror
 OBJECTS = \
+	ft_max.o \
+	ft_min.o \
+	ft_tobase.o \
+	ft_strupper.o \
+	ft_strlower.o \
+	ft_strreverse.o \
+	ft_strrepeat.o \
 	ft_isalnum.o \
 	ft_isalpha.o \
 	ft_isascii.o \

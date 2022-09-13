@@ -6,22 +6,22 @@
 #    By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/13 14:29:59 by yonshin           #+#    #+#              #
-#    Updated: 2022/09/14 04:57:57 by yonshin          ###   ########.fr        #
+#    Updated: 2022/09/14 08:57:16 by yonshin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ARFLAGS = rc
-TARGET = libftprintf.a
+NAME = libftprintf.a
 CFLAGS = -Wall -Wextra -Werror
 OBJECTS = ft_printf.o \
-	ft_printf_conversion_c \
-	ft_printf_conversion_d \
-	ft_printf_conversion_i \
-	ft_printf_conversion_p \
-	ft_printf_conversion_s \
-	ft_printf_conversion_u \
-	ft_printf_conversion_x \
-	ft_printf_conversion_xx
+	ft_printf_conversion_c.o \
+	ft_printf_conversion_d.o \
+	ft_printf_conversion_i.o \
+	ft_printf_conversion_p.o \
+	ft_printf_conversion_s.o \
+	ft_printf_conversion_u.o \
+	ft_printf_conversion_x.o \
+	ft_printf_conversion_xx.o
 BONUS_OBJECTS = ft_printf_bonus.o
 LIB = ./lib/libft.a
 
@@ -31,10 +31,10 @@ else
 	OBJS = $(OBJECTS)
 endif
 
-all: $(TARGET)
+all: $(NAME)
 
-$(TARGET): $(OBJS)
-	cp $(LIB) ./$(TARGET)
+$(NAME): $(OBJS)
+	cp $(LIB) ./$(NAME)
 	ar $(ARFLAGS) $@ $^
 
 %.o: $(LIB) %.c
@@ -50,7 +50,7 @@ clean:
 	rm -f *.o
 
 fclean: clean
-	rm -f $(TARGET)
+	rm -f $(NAME)
 
 re: fclean
 	make all

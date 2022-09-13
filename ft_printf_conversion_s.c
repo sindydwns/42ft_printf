@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 19:50:26 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 05:08:56 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/14 08:26:58 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 
 char	*ft_printf_conversion_s(t_parsed_token *token, va_list *valst)
 {
-	valst++;
-	return (ft_strdup(token->str));
+	char	*value;
+
+	token++;
+	value = va_arg(*valst, char *);
+	return (ft_strdup(value));
 }

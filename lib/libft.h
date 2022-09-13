@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:52:51 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 04:05:41 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/14 08:38:37 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+int		ft_max(int a, int b);
+int		ft_min(int a, int b);
+char	*ft_tobase(unsigned long value, const char *base);
+char	*ft_strupper(char *str);
+char	*ft_strlower(char *str);
+char	*ft_strreverse(char *str);
+char	*ft_strrepeat(const char *str, int repeat);
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);

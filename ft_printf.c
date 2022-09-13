@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:15:29 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 05:27:45 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/14 08:58:04 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	skip_flag(char **str)
 		FLAG_SHARP,
 		FLAG_ZERO
 	};
-	int	flag;
+	int					flag;
 
 	flag = FLAG_NO;
 	while (ft_strchr(flags, **str))
@@ -126,23 +126,23 @@ void	parsing_print(void *t)
 static void	*stringify(t_parsed_token *t, va_list *valst)
 {
 	if (t->conversion == 0)
-		return ft_substr(t->str, 0, t->width);
+		return (ft_substr(t->str, 0, t->width));
 	if (t->conversion == 'c')
-		return ft_printf_conversion_c(t, valst);
+		return (ft_printf_conversion_c(t, valst));
 	if (t->conversion == 'd')
-		return ft_printf_conversion_d(t, valst);
+		return (ft_printf_conversion_d(t, valst));
 	if (t->conversion == 'i')
-		return ft_printf_conversion_i(t, valst);
+		return (ft_printf_conversion_i(t, valst));
 	if (t->conversion == 'p')
-		return ft_printf_conversion_p(t, valst);
+		return (ft_printf_conversion_p(t, valst));
 	if (t->conversion == 's')
-		return ft_printf_conversion_s(t, valst);
+		return (ft_printf_conversion_s(t, valst));
 	if (t->conversion == 'u')
-		return ft_printf_conversion_u(t, valst);
+		return (ft_printf_conversion_u(t, valst));
 	if (t->conversion == 'x')
-		return ft_printf_conversion_x(t, valst);
+		return (ft_printf_conversion_x(t, valst));
 	if (t->conversion == 'X')
-		return ft_printf_conversion_xx(t, valst);	
+		return (ft_printf_conversion_xx(t, valst));
 	return (0);
 }
 
@@ -180,16 +180,16 @@ int	ft_printf(const char *fmt, ...)
 	lst = chain_init(&ch, ft_lstnew((void *)fmt), CONTENT_NO_FREE)
 		->param1(&ch, "cdipsuxX%")->call(&ch, CHAIN_FLAT, indexing, free)
 		->curr;
-	printf("\n---- indexing -----\n");
-	ft_lstiter(lst, indexing_print);
+	// printf("\n---- indexing -----\n");
+	// ft_lstiter(lst, indexing_print);
 
 	lst = ch.call(&ch, CHAIN_MAP, parsing, free)->curr;
-	printf("\n----- parsed ------\n");
-	ft_lstiter(lst, parsing_print);	
+	// printf("\n----- parsed ------\n");
+	// ft_lstiter(lst, parsing_print);
 
 	lst = ch.param1(&ch, args)->call(&ch, CHAIN_MAP, stringify, free)->curr;
-	printf("\n---- stringify ----\n");
-	ft_lstiter(lst, str_print);
+	// printf("\n---- stringify ----\n");
+	// ft_lstiter(lst, str_print);
 
 	lst = ch.call(&ch, CHAIN_REDUCE, print, free)->curr;
 
@@ -210,10 +210,10 @@ void check_leak(void)
 int main(void)
 {
 	// char	*str = "asdf%da%%fsdf%%%saasdf";
-	char	*str = "asdf%da%%fsdf%%%saasdf";
-	int i = ft_printf(str, 1, "test");
+	char c;
+	int i = ft_printf("%p", &c);
 	// printf(str, 1, "test");
 	printf("\n%d\n", i);
-	atexit(check_leak);
+	// atexit(check_leak);
 	return (0);
 }

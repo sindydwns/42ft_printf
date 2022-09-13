@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 19:47:48 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 05:00:16 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/14 06:53:15 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define FORMAT_USE_WIDTH 4
 # define FORMAT_USE_PRECISION 8
 # define ERR -1
+# include <stdarg.h>
 
 typedef struct s_substr
 {

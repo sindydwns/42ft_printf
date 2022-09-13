@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 16:04:43 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/12 18:48:14 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/13 16:00:25 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_list	*factory(t_chain *ch, t_list **lst, t_mapf f, void *valst)
 	return (0);
 }
 
-t_chain *chain_map(t_chain *chain, t_mapf f, ...)
+t_chain	*chain_map(t_chain *chain, t_mapf f, ...)
 {
 	va_list	args;
 

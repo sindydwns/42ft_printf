@@ -6,16 +6,16 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 23:02:47 by yonshin           #+#    #+#             */
-/*   Updated: 2022/08/02 19:32:16 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/13 16:02:01 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# include <unistd.h>
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1024
+#  define BUFFER_SIZE 1024
 # endif
+# include <unistd.h>
 
 typedef struct s_node
 {

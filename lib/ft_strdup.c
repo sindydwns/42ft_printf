@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 19:33:58 by yonshin           #+#    #+#             */
-/*   Updated: 2022/07/12 12:03:01 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/14 09:20:35 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strdup(const char *s1)
 	size_t	size;
 	char	*dup;
 
+	if (s1 == 0)
+		return (0);
 	size = 0;
 	while (s1[size])
 		size++;

@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:44:38 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/13 22:38:53 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/14 09:07:18 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ typedef struct s_chain
 	struct s_chain	*(*param0)(struct s_chain *chain);
 	struct s_chain	*(*param1)(struct s_chain *chain, void *p1);
 	struct s_chain	*(*param2)(struct s_chain *chain, void *p1, void *p2);
-	struct s_chain	*(*param3)(struct s_chain *chain, void *p1, void *p2, void *p3);
+	struct s_chain	*(*param3)(struct s_chain *chain, void *p1, void *p2,
+			void *p3);
 	struct s_chain	*(*call)(struct s_chain *chain, int t, void *f, t_delf d);
 	struct s_chain	*(*free)(struct s_chain *chain, int range);
 	t_list			*(*next)(struct s_chain *chain);
@@ -64,7 +65,7 @@ typedef struct s_lstb
 t_chain	*chain_init(t_chain *chain, t_list *lst, t_delf d);
 t_chain	*chain_iterate(t_chain *chain, t_factory fct, t_mapf f);
 t_list	*chain_next(t_chain *ch);
-t_chain *chain_param0(t_chain *ch);
+t_chain	*chain_param0(t_chain *ch);
 t_chain	*chain_param1(t_chain *ch, void *p1);
 t_chain	*chain_param2(t_chain *ch, void *p1, void *p2);
 t_chain	*chain_param3(t_chain *ch, void *p1, void *p2, void *p3);

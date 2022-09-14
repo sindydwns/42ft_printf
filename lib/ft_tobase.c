@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ptoh.c                                          :+:      :+:    :+:   */
+/*   ft_tobase.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 07:19:56 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 08:37:43 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/14 09:05:21 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_tobase(unsigned long value, const char *base)
 	int		len;
 
 	if (value == 0)
-		return ft_strdup("0");
+		return (ft_strdup("0"));
 	len = ft_strlen(base);
 	if (len == 0)
 		return (0);
@@ -30,5 +30,5 @@ char	*ft_tobase(unsigned long value, const char *base)
 		value /= len;
 	}
 	buff[idx] = 0;
-	return (ft_strreverse(buff));	
+	return (ft_strreverse(buff));
 }

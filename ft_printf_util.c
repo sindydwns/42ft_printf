@@ -1,0 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_util.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/14 09:02:43 by yonshin           #+#    #+#             */
+/*   Updated: 2022/09/14 09:10:50 by yonshin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf_private.h"
+#include "libft.h"
+
+int	skip_flag(char **str, const char *flags)
+{
+	const static int	flag_map[] = {
+		FLAG_DASH,
+		FLAG_PLUS,
+		FLAG_SPACE,
+		FLAG_SHARP,
+		FLAG_ZERO
+	};
+	int					flag;
+
+	flag = FLAG_NO;
+	while (ft_strchr(flags, **str))
+	{
+		flag |= flag_map[ft_strchri(flags, **str)];
+		(*str)++;
+	}
+	return (flag);
+}
+
+int	skip_number(char **str)
+{
+	int	width;
+
+	width = 0;
+	while (ft_isdigit(**str))
+	{
+		width = width * 10 + (**str - '0');
+		(*str)++;
+	}
+	return (width);
+}

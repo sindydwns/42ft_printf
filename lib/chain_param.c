@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 21:25:48 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/13 22:33:21 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/14 09:05:52 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_chain	*chain_param1(t_chain *ch, void *p1)
 	return (ch);
 }
 
-t_chain *chain_param2(t_chain *ch, void *p1, void *p2)
+t_chain	*chain_param2(t_chain *ch, void *p1, void *p2)
 {
 	ch->param[0] = p1;
 	ch->param[1] = p2;
@@ -33,7 +33,7 @@ t_chain *chain_param2(t_chain *ch, void *p1, void *p2)
 	return (ch);
 }
 
-t_chain *chain_param3(t_chain *ch, void *p1, void *p2, void *p3)
+t_chain	*chain_param3(t_chain *ch, void *p1, void *p2, void *p3)
 {
 	ch->param[0] = p1;
 	ch->param[1] = p2;

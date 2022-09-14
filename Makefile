@@ -6,14 +6,16 @@
 #    By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/13 14:29:59 by yonshin           #+#    #+#              #
-#    Updated: 2022/09/14 08:57:16 by yonshin          ###   ########.fr        #
+#    Updated: 2022/09/14 09:10:01 by yonshin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ARFLAGS = rc
 NAME = libftprintf.a
 CFLAGS = -Wall -Wextra -Werror
-OBJECTS = ft_printf.o \
+OBJECTS = \
+	ft_printf.o \
+	ft_printf_util.o \
 	ft_printf_conversion_c.o \
 	ft_printf_conversion_d.o \
 	ft_printf_conversion_i.o \
@@ -42,9 +44,6 @@ $(NAME): $(OBJS)
 
 $(LIB):
 	make -C $(dir $@)
-
-bonus:
-	make WITH_BONUS = 1
 
 clean:
 	rm -f *.o

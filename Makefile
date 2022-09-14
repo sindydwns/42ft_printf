@@ -6,7 +6,7 @@
 #    By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/13 14:29:59 by yonshin           #+#    #+#              #
-#    Updated: 2022/09/14 11:01:30 by yonshin          ###   ########.fr        #
+#    Updated: 2022/09/14 13:03:44 by yonshin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ $(LIB):
 	make -C $(dir $@)
 
 bonus:
-	make WITH_BONUS = 1
+	make WITH_BONUS=1
 
 clean:
 	rm -f *.o

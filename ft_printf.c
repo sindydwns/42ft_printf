@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:15:29 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 09:08:05 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/14 10:30:00 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,38 +65,38 @@ static void	*parsing(t_substr *s)
 static void	*stringify(t_parsed_token *t, va_list *valst)
 {
 	if (t->conversion == 0)
-		return (ft_substr(t->str, 0, t->width));
+		return (create_substr(ft_substr(t->str, 0, t->width), t->width));
 	if (t->conversion == 'c')
-		return (ft_printf_conversion_c(t, valst));
+		return (ft_printf_conv_c(t, valst));
 	if (t->conversion == 'd')
-		return (ft_printf_conversion_d(t, valst));
+		return (ft_printf_conv_d(t, valst));
 	if (t->conversion == 'i')
-		return (ft_printf_conversion_i(t, valst));
+		return (ft_printf_conv_i(t, valst));
 	if (t->conversion == 'p')
-		return (ft_printf_conversion_p(t, valst));
+		return (ft_printf_conv_p(t, valst));
 	if (t->conversion == 's')
-		return (ft_printf_conversion_s(t, valst));
+		return (ft_printf_conv_s(t, valst));
 	if (t->conversion == 'u')
-		return (ft_printf_conversion_u(t, valst));
+		return (ft_printf_conv_u(t, valst));
 	if (t->conversion == 'x')
-		return (ft_printf_conversion_x(t, valst));
+		return (ft_printf_conv_x(t, valst));
 	if (t->conversion == 'X')
-		return (ft_printf_conversion_xx(t, valst));
+		return (ft_printf_conv_xx(t, valst));
 	return (0);
 }
 
 static void	*print(t_list **lst)
 {
-	int		*res;
-	char	*str;
+	int			*res;
+	t_substr	*substr;
 
 	res = (int *)ft_calloc(1, sizeof(int));
 	if (res == 0)
 		return (0);
 	while (*lst)
 	{
-		str = (*lst)->content;
-		*res += write(1, str, ft_strlen(str));
+		substr = (*lst)->content;
+		*res += write(1, substr->str, substr->len);
 		*lst = (*lst)->next;
 	}
 	return (res);
@@ -104,21 +104,25 @@ static void	*print(t_list **lst)
 
 int	ft_printf(const char *fmt, ...)
 {
-	va_list	args;
+	va_list	valst;
 	t_chain	ch;
 	t_list	*lst;
 	int		res;
 
-	va_start(args, fmt);
+	if (fmt == 0)
+		return (-1);
+	if (*fmt == 0)
+		return (0);
+	va_start(valst, fmt);
 	lst = chain_init(&ch, ft_lstnew((void *)fmt), CONTENT_NO_FREE)
 		->param1(&ch, "cdipsuxX%")
 		->call(&ch, CHAIN_FLAT, indexing, free)
 		->call(&ch, CHAIN_MAP, parsing, free)
-		->param1(&ch, args)
-		->call(&ch, CHAIN_MAP, stringify, free)
+		->param1(&ch, valst)
+		->call(&ch, CHAIN_MAP, stringify, free_substr)
 		->call(&ch, CHAIN_REDUCE, print, free)
 		->next(&ch);
-	va_end(args);
+	va_end(valst);
 	if (lst == 0)
 		return (-1);
 	res = *((int *)lst->content);

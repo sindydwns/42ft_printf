@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 19:47:48 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 09:04:32 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/14 10:28:40 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define FORMAT_USE_FLAG 2
 # define FORMAT_USE_WIDTH 4
 # define FORMAT_USE_PRECISION 8
-# define ERR -1
+# define DETECT_LEN -1
 # include <stdarg.h>
 
 typedef struct s_substr
@@ -42,15 +42,17 @@ typedef struct s_parsed_token
 }	t_parsed_token;
 typedef char	*(*t_conversion_func)(t_parsed_token *token, va_list *valst);
 
-int		skip_flag(char **str, const char *flags);
-int		skip_number(char **str);
-char	*ft_printf_conversion_c(t_parsed_token *token, va_list *valst);
-char	*ft_printf_conversion_d(t_parsed_token *token, va_list *valst);
-char	*ft_printf_conversion_i(t_parsed_token *token, va_list *valst);
-char	*ft_printf_conversion_p(t_parsed_token *token, va_list *valst);
-char	*ft_printf_conversion_s(t_parsed_token *token, va_list *valst);
-char	*ft_printf_conversion_u(t_parsed_token *token, va_list *valst);
-char	*ft_printf_conversion_x(t_parsed_token *token, va_list *valst);
-char	*ft_printf_conversion_xx(t_parsed_token *token, va_list *valst);
+int			skip_flag(char **str, const char *flags);
+int			skip_number(char **str);
+void		free_substr(void *substr);
+t_substr	*create_substr(char *str, int len);
+t_substr	*ft_printf_conv_c(t_parsed_token *token, va_list *valst);
+t_substr	*ft_printf_conv_d(t_parsed_token *token, va_list *valst);
+t_substr	*ft_printf_conv_i(t_parsed_token *token, va_list *valst);
+t_substr	*ft_printf_conv_p(t_parsed_token *token, va_list *valst);
+t_substr	*ft_printf_conv_s(t_parsed_token *token, va_list *valst);
+t_substr	*ft_printf_conv_u(t_parsed_token *token, va_list *valst);
+t_substr	*ft_printf_conv_x(t_parsed_token *token, va_list *valst);
+t_substr	*ft_printf_conv_xx(t_parsed_token *token, va_list *valst);
 
 #endif

@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_conversion_xx.c                          :+:      :+:    :+:   */
+/*   ft_printf_conv_s.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/19 19:50:34 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 08:40:53 by yonshin          ###   ########.fr       */
+/*   Created: 2022/08/19 19:50:26 by yonshin           #+#    #+#             */
+/*   Updated: 2022/09/14 10:17:25 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stdarg.h>
 #include "libft.h"
 #include "ft_printf_private.h"
 
-char	*ft_printf_conversion_xx(t_parsed_token *token, va_list *valst)
+t_substr	*ft_printf_conv_s(t_parsed_token *token, va_list *valst)
 {
-	void			*value;
-	char			*temp;
-	char			*res;
+	char	*value;
+	char	*res;
 
 	token++;
-	value = va_arg(*valst, void *);
-	res = ft_tobase((unsigned int)value, "0123456789ABCDEF");
-	temp = res;
-	res = ft_strjoin("0X", res);
-	free(temp);
-	return (res);
+	value = va_arg(*valst, char *);
+	if (value == 0)
+		res = ft_strdup("(null)");
+	else
+		res = ft_strdup(value);
+	return (create_substr(res, DETECT_LEN));
 }

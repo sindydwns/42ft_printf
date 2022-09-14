@@ -6,7 +6,7 @@
 #    By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/13 14:29:59 by yonshin           #+#    #+#              #
-#    Updated: 2022/09/14 09:10:01 by yonshin          ###   ########.fr        #
+#    Updated: 2022/09/14 10:31:45 by yonshin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,25 @@ CFLAGS = -Wall -Wextra -Werror
 OBJECTS = \
 	ft_printf.o \
 	ft_printf_util.o \
-	ft_printf_conversion_c.o \
-	ft_printf_conversion_d.o \
-	ft_printf_conversion_i.o \
-	ft_printf_conversion_p.o \
-	ft_printf_conversion_s.o \
-	ft_printf_conversion_u.o \
-	ft_printf_conversion_x.o \
-	ft_printf_conversion_xx.o
-BONUS_OBJECTS = ft_printf_bonus.o
+	ft_printf_conv_c.o \
+	ft_printf_conv_d.o \
+	ft_printf_conv_i.o \
+	ft_printf_conv_p.o \
+	ft_printf_conv_s.o \
+	ft_printf_conv_u.o \
+	ft_printf_conv_x.o \
+	ft_printf_conv_xx.o
+BONUS_OBJECTS = \
+	ft_printf_bonus.o \
+	ft_printf_util_bonus.o \
+	ft_printf_conv_c_bonus.o \
+	ft_printf_conv_d_bonus.o \
+	ft_printf_conv_i_bonus.o \
+	ft_printf_conv_p_bonus.o \
+	ft_printf_conv_s_bonus.o \
+	ft_printf_conv_u_bonus.o \
+	ft_printf_conv_x_bonus.o \
+	ft_printf_conv_xx_bonus.o
 LIB = ./lib/libft.a
 
 ifdef WITH_BONUS
@@ -44,6 +54,9 @@ $(NAME): $(OBJS)
 
 $(LIB):
 	make -C $(dir $@)
+
+bonus:
+	make WITH_BONUS = 1
 
 clean:
 	rm -f *.o

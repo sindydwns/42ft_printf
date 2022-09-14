@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_conversion_s.c                           :+:      :+:    :+:   */
+/*   ft_printf_conv_x.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/19 19:50:26 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 08:26:58 by yonshin          ###   ########.fr       */
+/*   Created: 2022/08/19 19:50:31 by yonshin           #+#    #+#             */
+/*   Updated: 2022/09/14 10:07:39 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <stdarg.h>
 #include "libft.h"
 #include "ft_printf_private.h"
 
-char	*ft_printf_conversion_s(t_parsed_token *token, va_list *valst)
+t_substr	*ft_printf_conv_x(t_parsed_token *token, va_list *valst)
 {
-	char	*value;
+	unsigned int	value;
+	char			*res;
 
 	token++;
-	value = va_arg(*valst, char *);
-	return (ft_strdup(value));
+	value = va_arg(*valst, unsigned int);
+	res = ft_tobase(value, "0123456789abcdef");
+	return (create_substr(res, DETECT_LEN));
 }

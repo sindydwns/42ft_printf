@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 07:44:03 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 09:04:56 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/14 12:53:25 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ char	*ft_strreverse(char *str)
 	if (str == 0)
 		return (0);
 	len = ft_strlen(str);
-	res = (char *)malloc(sizeof(char) * ft_strlen(str) + 1);
+	res = (char *)malloc(sizeof(char) * len + 1);
+	if (res == 0)
+		return (0);
 	res[len] = 0;
 	if (res == 0)
 		return (0);

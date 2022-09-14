@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 06:14:02 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 06:39:54 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/14 11:35:42 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*ft_strrepeat(const char *str, int repeat)
 		return (ft_strdup(""));
 	len = ft_strlen(str);
 	res = (char *)malloc(sizeof(char) * len * repeat + 1);
+	if (res == 0)
+		return (0);
 	res[len * repeat] = 0;
 	while (--repeat >= 0)
 	{

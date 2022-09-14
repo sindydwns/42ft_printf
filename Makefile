@@ -6,7 +6,7 @@
 #    By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/13 14:29:59 by yonshin           #+#    #+#              #
-#    Updated: 2022/09/14 10:31:45 by yonshin          ###   ########.fr        #
+#    Updated: 2022/09/14 11:01:30 by yonshin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ BONUS_OBJECTS = \
 LIB = ./lib/libft.a
 
 ifdef WITH_BONUS
-	OBJS = $(OBJECTS) $(BONUS_OBJECTS)
+	OBJS = $(BONUS_OBJECTS)
 else
 	OBJS = $(OBJECTS)
 endif

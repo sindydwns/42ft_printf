@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:15:29 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 10:30:00 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/14 12:37:55 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ static void	*parsing(t_substr *s)
 	return (res);
 }
 
-static void	*stringify(t_parsed_token *t, va_list *valst)
+static void	*tosubstr(t_parsed_token *t, va_list *valst)
 {
+	if (t == 0)
+		return (0);
 	if (t->conversion == 0)
 		return (create_substr(ft_substr(t->str, 0, t->width), t->width));
 	if (t->conversion == 'c')
@@ -87,18 +89,25 @@ static void	*stringify(t_parsed_token *t, va_list *valst)
 
 static void	*print(t_list **lst)
 {
+	int			len;
 	int			*res;
 	t_substr	*substr;
+	int			written;
 
-	res = (int *)ft_calloc(1, sizeof(int));
-	if (res == 0)
-		return (0);
+	len = 0;
 	while (*lst)
 	{
 		substr = (*lst)->content;
-		*res += write(1, substr->str, substr->len);
+		written = write(1, substr->str, substr->len);
+		if (written != substr->len)
+			return (0);
+		len += written;
 		*lst = (*lst)->next;
 	}
+	res = (int *)malloc(sizeof(int));
+	if (res == 0)
+		return (0);
+	*res = len;
 	return (res);
 }
 
@@ -119,7 +128,7 @@ int	ft_printf(const char *fmt, ...)
 		->call(&ch, CHAIN_FLAT, indexing, free)
 		->call(&ch, CHAIN_MAP, parsing, free)
 		->param1(&ch, valst)
-		->call(&ch, CHAIN_MAP, stringify, free_substr)
+		->call(&ch, CHAIN_MAP, tosubstr, free_substr)
 		->call(&ch, CHAIN_REDUCE, print, free)
 		->next(&ch);
 	va_end(valst);

@@ -6,7 +6,7 @@
 #    By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/13 14:29:59 by yonshin           #+#    #+#              #
-#    Updated: 2022/09/14 08:38:29 by yonshin          ###   ########.fr        #
+#    Updated: 2022/09/15 19:55:42 by yonshin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ OPTIONS = rc
 NAME = libft.a
 CFLAGS = -Wall -Wextra -Werror
 OBJECTS = \
+	ft_if.o \
 	ft_max.o \
 	ft_min.o \
 	ft_tobase.o \
@@ -77,7 +78,14 @@ OBJECTS = \
 	chain_free.o \
 	lstb_init.o \
 	lstb_add.o \
-	lstb_clear.o
+	lstb_clear.o \
+	strb_add_left.o \
+	strb_add_right.o \
+	strb_build.o \
+	strb_clear.o \
+	strb_finish.o \
+	strb_init.o \
+	strb_new_node.o
 
 $(NAME): $(OBJECTS)
 	ar $(OPTIONS) $@ $^

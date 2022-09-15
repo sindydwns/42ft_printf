@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 12:59:42 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 12:59:42 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/15 15:45:57 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,8 @@ t_substr	*ft_printf_conv_d(t_parsed_token *token, va_list *valst)
 	value = va_arg(*valst, int);
 	res = ft_itoa(value);
 	return (create_substr(res, DETECT_LEN));
+
+	t_strb strb = strb_init(str, OPTION);
+	strb = strb
+
 }

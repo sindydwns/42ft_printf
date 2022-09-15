@@ -6,7 +6,7 @@
 #    By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/13 14:29:59 by yonshin           #+#    #+#              #
-#    Updated: 2022/09/14 13:03:44 by yonshin          ###   ########.fr        #
+#    Updated: 2022/09/15 15:37:28 by yonshin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OUTPUT_OPTION) -I$(dir $(LIB)) -c $*.c
 
 $(LIB):
-	make -C $(dir $@)
+	make -C $(@D)
 
 bonus:
 	make WITH_BONUS=1
@@ -65,6 +65,7 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean
+	make -C $(dir $(LIB))
 	make all
 
 .PHONY: all bonus clean fclean re

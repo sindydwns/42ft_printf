@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:12:16 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/15 20:44:48 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/16 16:18:16 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_strb
 	char			*(*finish)(struct s_strb *sb);
 }	t_strb;
 
-t_strb	*init_strb(t_strb *sb, char *str, t_del del);
+t_strb	*strb_init(t_strb *sb, char *str, t_del del);
 t_strb	*strb_add_left(t_strb *sb, char *str, t_del del);
 t_strb	*strb_add_right(t_strb *sb, char *str, t_del del);
 char	*strb_build(t_strb *sb);

@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:15:29 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/18 13:09:49 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/18 17:04:12 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ static void	*parsing(t_substr *s)
 	res->flags = skip_flag(&(s->str), "-+ #0");
 	res->width = skip_number(&(s->str));
 	if (s->str[0] == '.' && *(s->str)++)
+	{
+		res->flags |= FLAG_DOT;
 		res->precision = skip_number(&(s->str));
+	}
 	return (res);
 }
 

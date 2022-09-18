@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:12:16 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/16 16:18:16 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/18 12:10:59 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ typedef void	(*t_del)(void *p);
 typedef struct s_substr
 {
 	t_del	del;
-	void	*str;
+	char	*str;
 	int		len;
 }	t_substr;
 typedef struct s_strb
 {
-	t_list			*strs;
+	t_list			*substrs;
 	t_list			*last;
 	int				len;
 	int				err;
-	struct s_strb	*(*clear)(struct s_strb *sb);
 	struct s_strb	*(*add_left)(struct s_strb *sb, char *str, t_del del);
 	struct s_strb	*(*add_right)(struct s_strb *sb, char *str, t_del del);
+	struct s_strb	*(*clear)(struct s_strb *sb);
 	char			*(*build)(struct s_strb *sb);
 	char			*(*finish)(struct s_strb *sb);
 }	t_strb;

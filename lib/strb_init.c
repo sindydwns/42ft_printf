@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:50:59 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/16 16:17:51 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/18 12:13:09 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_strb	*strb_init(t_strb *sb, char *str, t_del del)
 {
-	sb->strs = 0;
+	sb->substrs = 0;
 	sb->last = 0;
 	sb->len = 0;
 	sb->err = 0;

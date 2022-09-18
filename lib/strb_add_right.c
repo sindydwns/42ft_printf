@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:02:02 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/16 16:20:09 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/18 12:12:10 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_strb	*strb_add_right(t_strb *sb, char *str, t_del del)
 		sb->err = 1;
 		return (sb);
 	}
-	ft_lstadd_back(&(sb->strs), node);
-	if (sb->strs == node)
+	ft_lstadd_back(&(sb->substrs), node);
+	if (sb->substrs == node)
 		sb->last = node;
 	return (sb);
 }

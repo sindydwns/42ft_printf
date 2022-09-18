@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:51:55 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/15 20:47:02 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/18 11:02:15 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_list	*strb_new_node(char *str, t_del del)
 	substr->del = del;
 	substr->len = ft_strlen(str);
 	node = ft_lstnew(substr);
-	if (node == 0)
+	if (node == 0 && del != 0)
 		del(str);
 	return (node);
 }

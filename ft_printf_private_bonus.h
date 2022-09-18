@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 13:00:14 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 13:00:14 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/18 12:58:59 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,8 @@
 # define FORMAT_USE_PRECISION 8
 # define DETECT_LEN -1
 # include <stdarg.h>
+# include <advstr.h>
 
-typedef struct s_substr
-{
-	char	*str;
-	int		len;
-}	t_substr;
 typedef struct s_parsed_token
 {
 	char	*str;

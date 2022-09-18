@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 12:59:29 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 12:59:29 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/18 13:10:09 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 #include "ft_printf_private_bonus.h"
 #include "advlst.h"
 
-static t_list	*indexing(char *s, const char *cnv)
+static t_list	*indexing(char *s)
 {
+	const static char	*cnv = "cdipsuxX%";
 	t_substr			*ct;
 	t_lstb				lstb;
 
@@ -124,7 +125,6 @@ int	ft_printf(const char *fmt, ...)
 		return (0);
 	va_start(valst, fmt);
 	lst = chain_init(&ch, ft_lstnew((void *)fmt), CONTENT_NO_FREE)
-		->param1(&ch, "cdipsuxX%")
 		->call(&ch, CHAIN_FLAT, indexing, free)
 		->call(&ch, CHAIN_MAP, parsing, free)
 		->param1(&ch, valst)

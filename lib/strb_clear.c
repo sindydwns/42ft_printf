@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:53:04 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/18 12:12:55 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/20 18:18:25 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 #include "libft.h"
 #include "advstr.h"
 
-t_strb	*strb_clear(t_strb *sb)
+t_strb	*strb_clear(t_strb *sb, char *str, t_del del)
 {
 	t_list		*lst;
 	t_list		*next;
-	t_del		del;
 
 	lst = sb->substrs;
 	while (lst)
 	{
 		next = lst->next;
-		del = ((t_substr *)lst->content)->del;
-		if (del)
-			del(((t_substr *)lst->content)->str);
+		if (((t_substr *)lst->content)->del)
+			((t_substr *)lst->content)->del(((t_substr *)lst->content)->str);
 		ft_lstdelone(lst, free);
 		lst = next;
 	}
@@ -34,5 +32,7 @@ t_strb	*strb_clear(t_strb *sb)
 	sb->last = 0;
 	sb->len = 0;
 	sb->err = 0;
+	if (str)
+		return (strb_init(sb, str, del));
 	return (sb);
 }

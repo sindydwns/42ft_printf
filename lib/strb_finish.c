@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:02:58 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/15 20:45:14 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/20 18:19:01 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ char	*strb_finish(struct s_strb *sb)
 
 	if (sb->err)
 	{
-		sb->clear(sb);
+		sb->clear(sb, 0, 0);
 		return (0);
 	}
 	res = sb->build(sb);
-	sb->clear(sb);
+	sb->clear(sb, 0, 0);
 	return (res);
 }

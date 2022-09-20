@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 13:15:29 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/18 17:04:12 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/20 17:45:22 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int	ft_printf(const char *fmt, ...)
 	lst = chain_init(&ch, ft_lstnew((void *)fmt), CONTENT_NO_FREE)
 		->call(&ch, CHAIN_FLAT, indexing, free)
 		->call(&ch, CHAIN_MAP, parsing, free)
-		->param1(&ch, valst)
+		->param1(&ch, &valst)
 		->call(&ch, CHAIN_MAP, tosubstr, free_substr)
 		->call(&ch, CHAIN_REDUCE, print, free)
 		->next(&ch);

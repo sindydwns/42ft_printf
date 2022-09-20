@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 12:59:29 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/20 17:45:10 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/20 20:46:41 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdlib.h>
 #include "ft_printf_bonus.h"
 #include "ft_printf_private_bonus.h"
-#include "advlst.h"
 
 static t_list	*indexing(char *s)
 {
@@ -25,11 +24,9 @@ static t_list	*indexing(char *s)
 	lstb_init(&lstb, 0);
 	while (*s)
 	{
-		ct = (t_substr *)malloc(sizeof(t_substr));
-		if (ct == 0 || lstb.add(&lstb, ct, free))
+		ct = strb_create_substr(s, 1, 0);
+		if (ct == 0 || lstb.add(&lstb, ct, free) == FT_ERROR)
 			return (lstb.clear(&lstb, free)->list);
-		ct->str = s;
-		ct->len = 1;
 		while (s[0] != '%' && s[ct->len] && s[ct->len] != '%')
 			ct->len++;
 		while (s[0] == '%' && s[ct->len] && ft_strchr(cnv, s[ct->len]) == 0)
@@ -71,7 +68,9 @@ static void	*tosubstr(t_parsed_token *t, va_list *valst)
 	if (t == 0)
 		return (0);
 	if (t->conversion == 0)
-		return (create_substr(ft_substr(t->str, 0, t->width), t->width));
+		return (strb_create_substr(t->str, t->width, 0));
+	if (t->conversion == '%')
+		return (strb_create_substr(t->str, 1, 0));
 	if (t->conversion == 'c')
 		return (ft_printf_conv_c(t, valst));
 	if (t->conversion == 'd')
@@ -102,6 +101,8 @@ static void	*print(t_list **lst)
 	while (*lst)
 	{
 		substr = (*lst)->content;
+		if (substr->str == 0)
+			return (0);
 		written = write(1, substr->str, substr->len);
 		if (written != substr->len)
 			return (0);
@@ -131,7 +132,7 @@ int	ft_printf(const char *fmt, ...)
 		->call(&ch, CHAIN_FLAT, indexing, free)
 		->call(&ch, CHAIN_MAP, parsing, free)
 		->param1(&ch, &valst)
-		->call(&ch, CHAIN_MAP, tosubstr, free_substr)
+		->call(&ch, CHAIN_MAP, tosubstr, strb_delete_substr)
 		->call(&ch, CHAIN_REDUCE, print, free)
 		->next(&ch);
 	va_end(valst);

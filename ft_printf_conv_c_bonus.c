@@ -6,12 +6,12 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 12:59:37 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/15 15:35:15 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/20 20:32:47 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
-#include "libft.h"
+#include <stdlib.h>
 #include "ft_printf_private_bonus.h"
 
 t_substr	*ft_printf_conv_c(t_parsed_token *token, va_list *valst)
@@ -29,5 +29,5 @@ t_substr	*ft_printf_conv_c(t_parsed_token *token, va_list *valst)
 		res[0] = value;
 	else
 		res[len - 1] = value;
-	return (create_substr(res, len));
+	return (strb_create_substr(res, len, free));
 }

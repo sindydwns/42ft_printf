@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stdarg.h>
-#include "libft.h"
+#include <stdlib.h>
 #include "ft_printf_private.h"
 
 t_substr	*ft_printf_conv_x(t_parsed_token *token, va_list *valst)
@@ -23,5 +22,5 @@ t_substr	*ft_printf_conv_x(t_parsed_token *token, va_list *valst)
 	token++;
 	value = va_arg(*valst, unsigned int);
 	res = ft_tobase(value, "0123456789abcdef");
-	return (create_substr(res, DETECT_LEN));
+	return (strb_create_substr(res, DETECT_LEN, free));
 }

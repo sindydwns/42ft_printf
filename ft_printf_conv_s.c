@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdarg.h>
-#include "libft.h"
+#include <stdlib.h>
 #include "ft_printf_private.h"
 
 t_substr	*ft_printf_conv_s(t_parsed_token *token, va_list *valst)
@@ -25,5 +25,5 @@ t_substr	*ft_printf_conv_s(t_parsed_token *token, va_list *valst)
 		res = ft_strdup("(null)");
 	else
 		res = ft_strdup(value);
-	return (create_substr(res, DETECT_LEN));
+	return (strb_create_substr(res, DETECT_LEN, free));
 }

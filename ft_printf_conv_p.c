@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stdarg.h>
-#include "libft.h"
+#include <stdlib.h>
 #include "ft_printf_private.h"
 
 t_substr	*ft_printf_conv_p(t_parsed_token *token, va_list *valst)
@@ -27,5 +26,5 @@ t_substr	*ft_printf_conv_p(t_parsed_token *token, va_list *valst)
 	temp = res;
 	res = ft_strjoin("0x", res);
 	free(temp);
-	return (create_substr(res, DETECT_LEN));
+	return (strb_create_substr(res, DETECT_LEN, free));
 }

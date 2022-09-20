@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 19:47:48 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/18 12:58:53 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/20 20:30:47 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@
 # define FORMAT_USE_FLAG 2
 # define FORMAT_USE_WIDTH 4
 # define FORMAT_USE_PRECISION 8
-# define DETECT_LEN -1
 # include <stdarg.h>
-# include <advstr.h>
+# include "libft.h"
+# include "advstr.h"
+# include "advlst.h"
 
 typedef struct s_parsed_token
 {
@@ -40,8 +41,6 @@ typedef char	*(*t_conversion_func)(t_parsed_token *token, va_list *valst);
 
 int			skip_flag(char **str, const char *flags);
 int			skip_number(char **str);
-void		free_substr(void *substr);
-t_substr	*create_substr(char *str, int len);
 t_substr	*ft_printf_conv_c(t_parsed_token *token, va_list *valst);
 t_substr	*ft_printf_conv_d(t_parsed_token *token, va_list *valst);
 t_substr	*ft_printf_conv_i(t_parsed_token *token, va_list *valst);

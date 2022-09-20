@@ -6,13 +6,12 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 13:00:19 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/14 13:00:19 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/20 20:32:18 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_printf_private_bonus.h"
-#include "libft.h"
 
 int	skip_flag(char **str, const char *flags)
 {
@@ -45,32 +44,4 @@ int	skip_number(char **str)
 		(*str)++;
 	}
 	return (width);
-}
-
-t_substr	*create_substr(char *str, int len)
-{
-	t_substr	*res;
-
-	if (str == 0)
-		return (0);
-	res = (t_substr *)malloc(sizeof(t_substr));
-	if (res == 0)
-	{
-		free(str);
-		return (0);
-	}
-	res->str = str;
-	if (len == DETECT_LEN)
-		res->len = ft_strlen(str);
-	else
-		res->len = len;
-	return (res);
-}
-
-void	free_substr(void *substr)
-{
-	if (substr == 0)
-		return ;
-	free(((t_substr *)substr)->str);
-	free(substr);
 }

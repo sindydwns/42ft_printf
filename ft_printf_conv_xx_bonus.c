@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 13:00:09 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/18 23:39:13 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/20 10:39:59 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_substr	*ft_printf_conv_xx(t_parsed_token *token, va_list *valst)
 		strb_init(&sb, ft_tobase(value, "0123456789ABCDEF"), free);
 	if (token->flags & FLAG_DOT)
 		sb.add_left(&sb, ft_strrepeat("0", token->precision - sb.len), free);
+	if (token->flags & FLAG_SHARP && value != 0)
+		sb.add_left(&sb, "0X", 0);
 	padding = ft_if(token->flags & FLAG_ZERO, "0", " ");
 	if (token->flags & FLAG_DASH)
 		sb.add_right(&sb, ft_strrepeat(padding, token->width - sb.len), free);

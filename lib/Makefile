@@ -6,7 +6,7 @@
 #    By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/13 14:29:59 by yonshin           #+#    #+#              #
-#    Updated: 2022/09/15 19:55:42 by yonshin          ###   ########.fr        #
+#    Updated: 2022/09/20 21:07:04 by yonshin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,9 @@ OBJECTS = \
 	strb_clear.o \
 	strb_finish.o \
 	strb_init.o \
-	strb_new_node.o
+	strb_new_node.o \
+	strb_create_substr.o \
+	strb_delete_substr.o
 
 $(NAME): $(OBJECTS)
 	ar $(OPTIONS) $@ $^

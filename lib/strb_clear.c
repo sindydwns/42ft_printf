@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:53:04 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/20 18:18:25 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/20 20:07:05 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,9 @@
 t_strb	*strb_clear(t_strb *sb, char *str, t_del del)
 {
 	t_list		*lst;
-	t_list		*next;
 
 	lst = sb->substrs;
-	while (lst)
-	{
-		next = lst->next;
-		if (((t_substr *)lst->content)->del)
-			((t_substr *)lst->content)->del(((t_substr *)lst->content)->str);
-		ft_lstdelone(lst, free);
-		lst = next;
-	}
+	ft_lstclear(&(sb->substrs), strb_delete_substr);
 	sb->substrs = 0;
 	sb->last = 0;
 	sb->len = 0;

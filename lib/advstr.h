@@ -6,12 +6,13 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:12:16 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/20 18:13:42 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/20 20:35:41 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ADVSTR_H
 # define ADVSTR_H
+# define DETECT_LEN -1
 # include "libft.h"
 
 typedef void	(*t_del)(void *p);
@@ -34,11 +35,13 @@ typedef struct s_strb
 	char			*(*finish)(struct s_strb *sb);
 }	t_strb;
 
-t_strb	*strb_init(t_strb *sb, char *str, t_del del);
-t_strb	*strb_add_left(t_strb *sb, char *str, t_del del);
-t_strb	*strb_add_right(t_strb *sb, char *str, t_del del);
-char	*strb_build(t_strb *sb);
-t_strb	*strb_clear(t_strb *sb, char *str, t_del del);
-char	*strb_finish(struct s_strb *sb);
-t_list	*strb_new_node(char *str, t_del del);
+t_strb		*strb_init(t_strb *sb, char *str, t_del del);
+t_strb		*strb_add_left(t_strb *sb, char *str, t_del del);
+t_strb		*strb_add_right(t_strb *sb, char *str, t_del del);
+char		*strb_build(t_strb *sb);
+t_strb		*strb_clear(t_strb *sb, char *str, t_del del);
+char		*strb_finish(struct s_strb *sb);
+t_list		*strb_new_node(char *str, t_del del);
+t_substr	*strb_create_substr(char *str, int len, t_del del);
+void		strb_delete_substr(void *substr);
 #endif

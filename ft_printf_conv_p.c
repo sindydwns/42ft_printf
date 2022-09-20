@@ -17,14 +17,14 @@
 t_substr	*ft_printf_conv_p(t_parsed_token *token, va_list *valst)
 {
 	void	*value;
-	char	*temp;
-	char	*res;
+	t_strb	sb;
 
-	token++;
 	value = va_arg(*valst, void *);
-	res = ft_tobase((unsigned long)value, "0123456789abcdef");
-	temp = res;
-	res = ft_strjoin("0x", res);
-	free(temp);
-	return (strb_create_substr(res, DETECT_LEN, free));
+	strb_init(&sb, ft_tobase((unsigned long)value, "0123456789abcdef"), free);
+	sb.add_left(&sb, "0x", 0);
+	if (token->flags & FLAG_DASH)
+		sb.add_right(&sb, ft_strrepeat(" ", token->width - sb.len), free);
+	else
+		sb.add_left(&sb, ft_strrepeat(" ", token->width - sb.len), free);
+	return (strb_create_substr(sb.finish(&sb), DETECT_LEN, free));
 }

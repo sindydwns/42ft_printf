@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 19:47:48 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/20 20:30:47 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/21 00:06:36 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ typedef struct s_parsed_token
 }	t_parsed_token;
 typedef char	*(*t_conversion_func)(t_parsed_token *token, va_list *valst);
 
-int			skip_flag(char **str, const char *flags);
+int			skip_flag(char **str);
 int			skip_number(char **str);
+char		skip_conversion(char **str);
+char		*read_context(t_parsed_token *token, char *s);
 t_substr	*ft_printf_conv_c(t_parsed_token *token, va_list *valst);
 t_substr	*ft_printf_conv_d(t_parsed_token *token, va_list *valst);
 t_substr	*ft_printf_conv_i(t_parsed_token *token, va_list *valst);

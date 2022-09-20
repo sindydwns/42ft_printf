@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 12:59:29 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/20 20:46:41 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/21 00:05:51 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,52 +15,20 @@
 #include "ft_printf_bonus.h"
 #include "ft_printf_private_bonus.h"
 
-static t_list	*indexing(char *s)
+static t_list	*parsing(char *s)
 {
-	const static char	*cnv = "cdipsuxX%";
-	t_substr			*ct;
-	t_lstb				lstb;
+	t_parsed_token	*content;
+	t_lstb			lstb;
 
 	lstb_init(&lstb, 0);
 	while (*s)
 	{
-		ct = strb_create_substr(s, 1, 0);
-		if (ct == 0 || lstb.add(&lstb, ct, free) == FT_ERROR)
+		content = (t_parsed_token *)ft_calloc(1, sizeof(t_parsed_token));
+		if (content == 0 || lstb.add(&lstb, content, free) == FT_ERROR)
 			return (lstb.clear(&lstb, free)->list);
-		while (s[0] != '%' && s[ct->len] && s[ct->len] != '%')
-			ct->len++;
-		while (s[0] == '%' && s[ct->len] && ft_strchr(cnv, s[ct->len]) == 0)
-			ct->len++;
-		if (s[0] == '%' && s[ct->len])
-			ct->len++;
-		s += ct->len;
+		s = read_context(content, s);
 	}
 	return (lstb.list);
-}
-
-static void	*parsing(t_substr *s)
-{
-	t_parsed_token	*res;
-
-	res = (t_parsed_token *)ft_calloc(1, sizeof(t_parsed_token));
-	if (res == 0)
-		return (0);
-	res->str = s->str++;
-	if (res->str[0] != '%')
-		res->width = s->len;
-	if (res->str[1] == '%')
-		res->width = 1;
-	if (res->str[0] != '%' || res->str[1] == '%')
-		return (res);
-	res->conversion = res->str[s->len - 1];
-	res->flags = skip_flag(&(s->str), "-+ #0");
-	res->width = skip_number(&(s->str));
-	if (s->str[0] == '.' && *(s->str)++)
-	{
-		res->flags |= FLAG_DOT;
-		res->precision = skip_number(&(s->str));
-	}
-	return (res);
 }
 
 static void	*tosubstr(t_parsed_token *t, va_list *valst)
@@ -70,7 +38,7 @@ static void	*tosubstr(t_parsed_token *t, va_list *valst)
 	if (t->conversion == 0)
 		return (strb_create_substr(t->str, t->width, 0));
 	if (t->conversion == '%')
-		return (strb_create_substr(t->str, 1, 0));
+		return (ft_printf_conv_c(t, valst));
 	if (t->conversion == 'c')
 		return (ft_printf_conv_c(t, valst));
 	if (t->conversion == 'd')
@@ -87,7 +55,7 @@ static void	*tosubstr(t_parsed_token *t, va_list *valst)
 		return (ft_printf_conv_x(t, valst));
 	if (t->conversion == 'X')
 		return (ft_printf_conv_xx(t, valst));
-	return (0);
+	return (strb_create_substr(0, 0, 0));
 }
 
 static void	*print(t_list **lst)
@@ -102,7 +70,10 @@ static void	*print(t_list **lst)
 	{
 		substr = (*lst)->content;
 		if (substr->str == 0)
-			return (0);
+		{
+			len = -1;
+			break ;
+		}
 		written = write(1, substr->str, substr->len);
 		if (written != substr->len)
 			return (0);
@@ -129,8 +100,7 @@ int	ft_printf(const char *fmt, ...)
 		return (0);
 	va_start(valst, fmt);
 	lst = chain_init(&ch, ft_lstnew((void *)fmt), CONTENT_NO_FREE)
-		->call(&ch, CHAIN_FLAT, indexing, free)
-		->call(&ch, CHAIN_MAP, parsing, free)
+		->call(&ch, CHAIN_FLAT, parsing, free)
 		->param1(&ch, &valst)
 		->call(&ch, CHAIN_MAP, tosubstr, strb_delete_substr)
 		->call(&ch, CHAIN_REDUCE, print, free)

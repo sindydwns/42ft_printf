@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 12:59:54 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/18 23:38:42 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/20 18:19:57 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,10 @@ t_substr	*ft_printf_conv_s(t_parsed_token *token, va_list *valst)
 
 	value = va_arg(*valst, char *);
 	if (value == 0)
-		return (create_substr(ft_strdup("(null)"), DETECT_LEN));
+		value = "(null)";
+	strb_init(&sb, value, 0);
 	if (token->flags & FLAG_DOT)
-		strb_init(&sb, ft_substr(value, 0, token->precision), free);
-	else
-		strb_init(&sb, value, 0);
+		sb.clear(&sb, ft_substr(value, 0, token->precision), free);
 	if (token->flags & FLAG_DASH)
 		sb.add_right(&sb, ft_strrepeat(" ", token->width - sb.len), free);
 	else

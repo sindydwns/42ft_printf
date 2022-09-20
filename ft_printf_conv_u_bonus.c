@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 12:59:58 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/18 21:52:51 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/20 18:32:44 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,17 @@ t_substr	*ft_printf_conv_u(t_parsed_token *token, va_list *valst)
 {
 	unsigned int	value;
 	t_strb			sb;
-	char			*padding;
+	t_strb			*(*add_str)(t_strb *sb, char *str, t_del del);
 
 	value = va_arg(*valst, unsigned int);
+	strb_init(&sb, uitoa(value), free);
 	if (value == 0 && token->flags & FLAG_DOT)
-		strb_init(&sb, 0, 0);
-	else
-		strb_init(&sb, uitoa(value), free);
+		sb.clear(&sb, 0, 0);
 	if (token->flags & FLAG_DOT)
 		sb.add_left(&sb, ft_strrepeat("0", token->precision - sb.len), free);
-	padding = ft_if(token->flags & FLAG_ZERO, "0", " ");
-	if (token->flags & FLAG_DASH)
-		sb.add_right(&sb, ft_strrepeat(padding, token->width - sb.len), free);
-	else
-		sb.add_left(&sb, ft_strrepeat(padding, token->width - sb.len), free);
+	else if (token->flags & FLAG_ZERO)
+		sb.add_left(&sb, ft_strrepeat("0", token->width - sb.len), free);
+	add_str = ft_if(token->flags & FLAG_DASH, sb.add_right, sb.add_left);
+	add_str(&sb, ft_strrepeat(" ", token->width - sb.len), free);
 	return (create_substr(sb.finish(&sb), DETECT_LEN));
 }

@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:02:02 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/18 21:08:19 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/23 16:23:00 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ t_strb	*strb_add_right(t_strb *sb, char *str, t_del del)
 	t_list	*node;
 
 	if (sb->err || str == 0)
+	{
+		sb->err = 1;
 		return (sb);
+	}
 	if (*str == 0)
 	{
 		if (del != 0)

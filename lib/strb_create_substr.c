@@ -6,7 +6,7 @@
 /*   By: yonshin <yonshin@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:49:48 by yonshin           #+#    #+#             */
-/*   Updated: 2022/09/20 20:37:43 by yonshin          ###   ########.fr       */
+/*   Updated: 2022/09/23 16:21:45 by yonshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_substr	*strb_create_substr(char *str, int len, t_del del)
 {
 	t_substr	*substr;
 
+	if (str == 0)
+		return (0);
 	substr = (t_substr *)malloc(sizeof(t_substr));
 	if (substr == 0)
 	{
